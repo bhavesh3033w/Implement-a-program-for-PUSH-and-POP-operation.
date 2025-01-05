@@ -1,0 +1,81 @@
+# Implement-a-program-for-PUSH-and-POP-operation.
+#include <iostream>
+using namespace std;
+
+class Stack {
+private:
+    int top;
+    int capacity;
+    int* stack;
+
+public:
+    // Constructor to initialize the stack
+    Stack(int size) {
+        capacity = size;
+        stack = new int[capacity];
+        top = -1;
+    }
+
+    // Destructor to free memory allocated to the stack
+    ~Stack() {
+        delete[] stack;
+    }
+
+    // Push operation to add element to the stack
+    void push(int value) {
+        if (top >= capacity - 1) {
+            cout << "Stack Overflow! Unable to push " << value << endl;
+        } else {
+            stack[++top] = value;
+            cout << value << " pushed to stack." << endl;
+        }
+    }
+
+    // Pop operation to remove element from the stack
+    void pop() {
+        if (top == -1) {
+            cout << "Stack Underflow! Stack is empty." << endl;
+        } else {
+            cout << stack[top--] << " popped from stack." << endl;
+        }
+    }
+};
+
+int main() {
+    int size, choice, value;
+
+    // Ask user for stack size
+    cout << "Enter the size of the stack: ";
+    cin >> size;
+
+    // Create a stack of the given size
+    Stack s(size);
+
+    // Menu-driven program for Stack operations
+    do {
+        cout << "\nStack Operations Menu:\n";
+        cout << "1. Push\n";
+        cout << "2. Pop\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to push: ";
+                cin >> value;
+                s.push(value);
+                break;
+            case 2:
+                s.pop();
+                break;
+            case 3:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice, please try again." << endl;
+        }
+    } while (choice != 3);
+
+    return 0;
+}
